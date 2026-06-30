@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAP PartnerEdge – Incubation Program</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: '72 Brand', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: #1d2d3e; background: #fff; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    :root {
+      --blue: #0070F2; --blue-dark: #0134BF; --navy: #00144A;
+      --sky: #4CB1FF; --light-blue: #E1F4FF;
+      --grey-bg: #F5F7FA; --grey-line: #E1E2E6;
+      --text: #1d2d3e; --muted: #556677;
+    }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 32px; }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 44px; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,.97); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--grey-line);
+      padding: 0 32px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.08); }
+    .nav-left { display: flex; align-items: center; gap: 16px; }
+    .nav-logo { height: 28px; }
+    .nav-divider { width: 1px; height: 24px; background: var(--grey-line); }
+    .nav-label { font-size: 14px; font-weight: 600; color: var(--text); }
+    .nav-links { display: flex; gap: 4px; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; color: var(--muted);
+      padding: 6px 12px; border-radius: 4px; transition: all .2s;
+    }
+    .nav-links a.active, .nav-links a:hover { color: var(--blue); background: var(--light-blue); }
+    .nav-cta {
+      background: var(--blue); color: #fff;
+      padding: 9px 22px; border-radius: 4px;
+      font-size: 13px; font-weight: 600; transition: background .2s;
+    }
+    .nav-cta:hover { background: var(--blue-dark); }
+
+    /* HERO */
+    .hero {
+      padding-top: 108px; min-height: 100vh;
+      display: flex; flex-direction: column;
+      background: linear-gradient(135deg, var(--navy) 0%, #002d75 50%, #0050b5 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero-blob1 {
+      position: absolute; top: -150px; right: -150px; width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(76,177,255,.16) 0%, transparent 70%);
+      border-radius: 50%; pointer-events: none;
+      animation: blob-pulse 8s ease-in-out infinite;
+    }
+    .hero-blob2 {
+      position: absolute; bottom: -100px; left: -100px; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,112,242,.15) 0%, transparent 70%);
+      border-radius: 50%; pointer-events: none;
+      animation: blob-pulse 10s ease-in-out infinite reverse;
+    }
+    @keyframes blob-pulse { 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.08); } }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: .04; pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+    .hero-body {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1;
+    }
+    .hero-content {
+      max-width: 840px; padding: 80px 32px 60px; text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(76,177,255,.14); border: 1px solid rgba(76,177,255,.32);
+      border-radius: 20px; padding: 6px 18px;
+      font-size: 11px; font-weight: 700; color: var(--sky);
+      letter-spacing: .09em; text-transform: uppercase; margin-bottom: 28px;
+    }
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--sky);
+      animation: dot-blink 2s ease-in-out infinite;
+    }
+    @keyframes dot-blink { 0%,100%{ opacity:1; } 50%{ opacity:.3; } }
+    .hero h1 {
+      font-size: clamp(34px, 5.5vw, 64px); font-weight: 800; color: #fff;
+      line-height: 1.1; letter-spacing: -.03em; margin-bottom: 14px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--sky) 0%, #a8e6ff 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub { font-size: 16px; color: rgba(255,255,255,.6); margin-bottom: 10px; }
+    .hero-desc { font-size: 15px; color: rgba(255,255,255,.44); max-width: 580px; margin: 0 auto 44px; line-height: 1.8; }
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+    .btn-primary {
+      background: var(--blue); color: #fff; padding: 15px 36px; border-radius: 5px;
+      font-size: 15px; font-weight: 600; display: inline-block;
+      box-shadow: 0 4px 22px rgba(0,112,242,.45);
+      transition: background .2s, transform .15s, box-shadow .2s;
+    }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,112,242,.58); }
+    .btn-ghost {
+      background: rgba(255,255,255,.1); color: #fff; border: 1px solid rgba(255,255,255,.26);
+      padding: 15px 36px; border-radius: 5px; font-size: 15px; font-weight: 600;
+      backdrop-filter: blur(8px); transition: all .2s; display: inline-block;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.2); transform: translateY(-2px); }
+    .scroll-hint { animation: bounce 2s ease-in-out infinite; }
+    @keyframes bounce { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(6px); } }
+    .scroll-hint svg { width: 22px; height: 22px; color: rgba(255,255,255,.28); }
+
+    /* Hero stats — inline below buttons */
+    .hero-stats {
+      display: flex; justify-content: center; flex-wrap: wrap;
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,.14);
+      width: 100%;
+    }
+    .hero-stat {
+      flex: 1; min-width: 110px; max-width: 180px;
+      padding: 0 20px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,.1);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .stat-val {
+      font-size: 36px; font-weight: 800; color: var(--sky);
+      line-height: 1; margin-bottom: 8px; letter-spacing: -.02em;
+    }
+    .stat-lbl { font-size: 12px; color: rgba(255,255,255,.62); letter-spacing: .1em; text-transform: uppercase; font-weight: 500; }
+
+    /* SHARED */
+    .s-label { font-size: 11px; font-weight: 700; color: var(--blue); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 10px; }
+    .s-title { font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; line-height: 1.18; color: var(--text); margin-bottom: 14px; letter-spacing: -.025em; }
+    .s-lead { font-size: 16px; color: var(--muted); line-height: 1.78; }
+
+    /* OVERVIEW */
+    .overview { padding: 100px 0; background: #fff; }
+    .ov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .ov-list { list-style: none; margin-top: 36px; }
+    .ov-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px 0; border-bottom: 1px solid var(--grey-line);
+      font-size: 13px; color: var(--muted);
+    }
+    .ov-item:last-child { border-bottom: none; }
+    .ov-item strong { display: block; color: var(--text); font-weight: 600; margin-bottom: 3px; font-size: 14px; }
+    .ov-icon {
+      flex-shrink: 0; width: 38px; height: 38px;
+      background: var(--light-blue); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; color: var(--blue);
+    }
+    .ov-icon svg { width: 17px; height: 17px; }
+    .ov-cards { display: flex; flex-direction: column; gap: 16px; }
+    .ov-card {
+      background: var(--grey-bg); border-radius: 12px;
+      border: 1px solid var(--grey-line); padding: 22px 26px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .ov-card:hover { box-shadow: 0 8px 28px rgba(0,112,242,.1); transform: translateY(-2px); }
+    .ov-card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .ov-card-ico {
+      width: 40px; height: 40px; background: var(--blue); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .ov-card-ico svg { width: 19px; height: 19px; }
+    .ov-card h3 { font-size: 15px; font-weight: 600; color: var(--text); }
+    .ov-card p { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* JOURNEY */
+    .journey { padding: 100px 0 80px; background: var(--grey-bg); }
+    .journey-hdr { text-align: center; margin-bottom: 52px; }
+    .journey-hdr .s-lead { max-width: 600px; margin: 0 auto; }
+
+    /* Phase tab nav */
+    .phase-nav {
+      display: flex; gap: 0;
+      border: 1px solid var(--grey-line); border-radius: 10px;
+      overflow: hidden; background: #fff;
+      margin-bottom: 32px;
+    }
+    .phase-tab {
+      flex: 1; padding: 14px 8px; text-align: center; cursor: pointer;
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      border: none; outline: none; font-family: inherit; background: transparent;
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+      border-right: 1px solid var(--grey-line); transition: all .22s;
+    }
+    .phase-tab:last-child { border-right: none; }
+    .phase-tab:hover { background: var(--light-blue); color: var(--blue); }
+    .phase-tab.active { background: var(--blue); color: #fff; }
+    .tab-num {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: rgba(0,0,0,.08); display: flex; align-items: center;
+      justify-content: center; font-size: 11px; font-weight: 700;
+    }
+    .phase-tab.active .tab-num { background: rgba(255,255,255,.22); }
+    .tab-month { font-size: 10px; opacity: .65; font-weight: 400; }
+
+    /* Phase progress */
+    .phase-progress { margin-bottom: 28px; }
+    .pp-bar { height: 4px; background: var(--grey-line); border-radius: 4px; overflow: hidden; }
+    .pp-fill {
+      height: 100%; background: linear-gradient(90deg, var(--blue), var(--sky));
+      border-radius: 4px; transition: width .5s cubic-bezier(.4,0,.2,1);
+    }
+    .pp-label {
+      display: flex; justify-content: space-between; margin-top: 8px;
+      font-size: 11px; color: var(--muted);
+    }
+    .pp-label strong { color: var(--blue); font-weight: 600; }
+
+    /* Phase panels */
+    .phase-panel { display: none; }
+    .phase-panel.active { display: block; animation: pan-in .35s ease; }
+    @keyframes pan-in { from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
+    .panel-inner {
+      background: #fff; border-radius: 16px; border: 1px solid var(--grey-line);
+      padding: 44px 52px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start;
+    }
+    .ph-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+    .ph-ico {
+      width: 60px; height: 60px; border-radius: 14px; background: var(--light-blue);
+      display: flex; align-items: center; justify-content: center; color: var(--blue); flex-shrink: 0;
+    }
+    .ph-ico svg { width: 28px; height: 28px; }
+    .ph-timing {
+      display: inline-block; font-size: 11px; font-weight: 600; color: var(--sky);
+      background: rgba(76,177,255,.12); border-radius: 10px; padding: 3px 10px;
+      margin-bottom: 6px; letter-spacing: .04em;
+    }
+    .ph-meta h3 { font-size: 22px; font-weight: 700; color: var(--text); line-height: 1.2; letter-spacing: -.02em; }
+    .panel-left p { font-size: 14px; color: var(--muted); line-height: 1.78; margin-bottom: 20px; }
+    .ph-note {
+      background: var(--light-blue); border-left: 3px solid var(--blue);
+      border-radius: 0 8px 8px 0; padding: 14px 18px;
+      font-size: 12px; color: #003580; line-height: 1.6;
+    }
+    .ph-note strong { display: block; font-size: 13px; margin-bottom: 3px; }
+    .panel-right h4 {
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .dl { list-style: none; }
+    .di {
+      display: flex; gap: 12px; padding: 13px 0;
+      border-bottom: 1px solid var(--grey-line);
+      font-size: 13px; color: var(--muted); line-height: 1.55;
+    }
+    .di:last-child { border-bottom: none; }
+    .d-ico {
+      flex-shrink: 0; width: 30px; height: 30px; background: var(--light-blue);
+      border-radius: 6px; display: flex; align-items: center; justify-content: center;
+      color: var(--blue); margin-top: 1px;
+    }
+    .d-ico svg { width: 14px; height: 14px; }
+    .di strong { display: block; color: var(--text); font-weight: 600; margin-bottom: 1px; }
+
+    /* ENABLEMENT */
+    .enablement { padding: 100px 0; background: #fff; }
+    .en-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 60px; }
+    .en-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+    .en-card {
+      background: var(--grey-bg); border-radius: 12px; border: 1px solid var(--grey-line);
+      padding: 28px 22px; text-align: center;
+      transition: box-shadow .22s, transform .22s, border-color .22s;
+    }
+    .en-card:hover { box-shadow: 0 8px 28px rgba(0,112,242,.1); transform: translateY(-3px); border-color: var(--blue); }
+    .en-ico {
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+    }
+    .en-card h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 7px; }
+    .en-card p { font-size: 12px; color: var(--muted); line-height: 1.65; }
+
+    /* FAQ */
+    .faq { padding: 100px 0; background: var(--grey-bg); }
+    .faq-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+    .faq-sticky { position: sticky; top: 80px; }
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item { border-bottom: 1px solid var(--grey-line); }
+    .faq-item:first-child { border-top: 1px solid var(--grey-line); }
+    .faq-q {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      padding: 18px 0; cursor: pointer; width: 100%; text-align: left;
+      font-size: 15px; font-weight: 600; color: var(--text);
+      background: transparent; border: none; outline: none; font-family: inherit;
+    }
+    .faq-q:hover { color: var(--blue); }
+    .faq-chev {
+      flex-shrink: 0; width: 20px; height: 20px; color: var(--muted);
+      transition: transform .3s;
+    }
+    .faq-item.open .faq-chev { transform: rotate(180deg); color: var(--blue); }
+    .faq-item.open .faq-q { color: var(--blue); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      font-size: 14px; color: var(--muted); line-height: 1.78;
+      transition: max-height .35s ease, padding .3s;
+    }
+    .faq-a.open { max-height: 400px; padding-bottom: 18px; }
+
+    /* GRADUATION */
+    .graduation {
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--navy) 0%, #002d75 55%, var(--blue-dark) 100%);
+      position: relative; overflow: hidden;
+    }
+    .grad-blob {
+      position: absolute; top: -200px; right: -200px; width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(76,177,255,.09) 0%, transparent 65%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .grad-inner {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .grad-text .s-label { color: var(--sky); }
+    .grad-text .s-title { color: #fff; }
+    .grad-text p { font-size: 15px; color: rgba(255,255,255,.58); line-height: 1.78; margin-bottom: 18px; }
+    .grad-card {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px; padding: 40px; backdrop-filter: blur(12px); text-align: center;
+    }
+    .cert-circle {
+      width: 72px; height: 72px; background: linear-gradient(135deg, var(--blue), var(--sky));
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px; box-shadow: 0 8px 32px rgba(0,112,242,.45);
+    }
+    .cert-circle svg { width: 36px; height: 36px; color: #fff; }
+    .grad-card h3 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .grad-card .sub { font-size: 13px; color: rgba(255,255,255,.45); margin-bottom: 28px; }
+    .cert-list { list-style: none; text-align: left; }
+    .cert-list li {
+      font-size: 13px; color: rgba(255,255,255,.7); padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      display: flex; gap: 10px; align-items: center;
+    }
+    .cert-list li:last-child { border-bottom: none; }
+    .c-chk {
+      flex-shrink: 0; width: 20px; height: 20px;
+      background: rgba(76,177,255,.18); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .c-chk svg { width: 10px; height: 10px; color: var(--sky); }
+
+    /* CTA */
+    .cta-band {
+      padding: 90px 0; background: var(--light-blue); text-align: center;
+      border-top: 1px solid rgba(0,112,242,.12); border-bottom: 1px solid rgba(0,112,242,.12);
+    }
+    .cta-band .s-label { color: var(--blue-dark); }
+    .cta-band .s-title { color: var(--navy); margin-bottom: 14px; }
+    .cta-band p { font-size: 16px; color: var(--muted); max-width: 560px; margin: 0 auto 44px; line-height: 1.78; }
+    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-outline {
+      display: inline-block; padding: 15px 36px; border-radius: 5px;
+      border: 1.5px solid var(--blue); color: var(--blue);
+      font-size: 15px; font-weight: 600; transition: all .2s;
+    }
+    .btn-outline:hover { background: var(--blue); color: #fff; }
+
+    /* FOOTER */
+    footer { background: var(--navy); padding: 52px 0 28px; }
+    .ft-top {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 48px; flex-wrap: wrap; padding-bottom: 36px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .ft-brand img { height: 24px; opacity: .82; margin-bottom: 12px; }
+    .ft-brand p { font-size: 12px; color: rgba(255,255,255,.34); max-width: 220px; line-height: 1.7; }
+    .ft-col h5 {
+      font-size: 11px; font-weight: 700; color: rgba(255,255,255,.48);
+      letter-spacing: .1em; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .ft-col a { display: block; font-size: 13px; color: rgba(255,255,255,.4); margin-bottom: 9px; transition: color .2s; }
+    .ft-col a:hover { color: rgba(255,255,255,.82); }
+    .ft-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px; padding-top: 22px;
+    }
+    .ft-copy { font-size: 11px; color: rgba(255,255,255,.24); }
+    .ft-badge {
+      font-size: 11px; background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1); border-radius: 4px;
+      padding: 5px 14px; color: rgba(255,255,255,.34); letter-spacing: .03em;
+    }
+
+    /* ANIMATIONS */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .fade-up.vis { opacity: 1; transform: none; }
+    .d1{ transition-delay:.08s; } .d2{ transition-delay:.18s; }
+    .d3{ transition-delay:.28s; } .d4{ transition-delay:.38s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .ov-grid, .en-top, .grad-inner, .faq-layout { grid-template-columns: 1fr; gap: 48px; }
+      .panel-inner { grid-template-columns: 1fr; gap: 32px; padding: 32px 28px; }
+      .en-grid { grid-template-columns: repeat(2,1fr); }
+      .nav-links { display: none; }
+      .faq-sticky { position: static; }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      .en-grid { grid-template-columns: 1fr; }
+      .nav-label { display: none; }
+      .phase-tab .tab-label { display: none; }
+      .hero-content { padding: 60px 20px 40px; }
+    }
+
+
+
+
+    /* PHASE 2 — DELIVERY CARD (horizontal rectangle spanning both cols) */
+    .role-card.role-span {
+      grid-column: 1 / -1;
+      display: flex; flex-direction: row;
+      align-items: center; gap: 16px;
+      text-align: left; padding: 14px 20px;
+    }
+    .role-card.role-span .role-ico { margin: 0; flex-shrink: 0; width: 44px; height: 44px; }
+    .role-card.role-span h4 { margin-bottom: 3px; }
+    .role-card.role-span p  { font-size: 12px; margin: 0; }
+
+    /* PHASE 2 — ALSO EXPLORE STRIP */
+    .also-explore {
+      border-top: 1px solid var(--grey-line);
+      padding: 28px 52px 32px;
+      background: #fff;
+    }
+    .ae-label {
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .ae-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .ae-card {
+      border-radius: 14px; padding: 24px 22px;
+      border: 1.5px solid transparent;
+      transition: transform .22s, box-shadow .22s;
+      position: relative; overflow: hidden;
+    }
+    .ae-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.1); }
+    .ae-card::before {
+      content: ''; position: absolute; top: -40px; right: -40px;
+      width: 120px; height: 120px; border-radius: 50%; opacity: .12;
+    }
+    .ae-sap { background: #F0F9F0; border-color: #B9E0BA; }
+    .ae-sap::before { background: #2E7D32; }
+    .ae-ai  { background: #F5F0FF; border-color: #D8B4FE; }
+    .ae-ai::before  { background: #6B21A8; }
+    .ae-ico {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+    .ae-sap .ae-ico { background: #C8EAC9; }
+    .ae-ai  .ae-ico { background: #EDE9FE; }
+    .ae-card h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .ae-card p  { font-size: 13px; color: var(--muted); line-height: 1.68; }
+    @media (max-width: 700px) {
+      .ae-grid { grid-template-columns: 1fr; }
+      .also-explore { padding: 22px 20px 26px; }
+    }
+    @media (max-width: 960px) { .also-explore { padding: 22px 28px 26px; } }
+
+
+
+    /* RIGHT-ALIGNED BUTTONS IN DETAIL ITEMS */
+    .di-body { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .di-txt  { flex: 1; }
+    .di-btn-r { flex-shrink: 0; margin-top: 0 !important; white-space: nowrap; }
+
+    /* NEED HELP TOPBAR */
+    .nh-topbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1001;
+      background: var(--navy); border-bottom: 1px solid rgba(255,255,255,.1);
+      height: 44px; display: flex; align-items: center;
+    }
+    .nh-topbar .container {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 16px; flex-wrap: nowrap;
+    }
+    .nh-topbar-left {
+      display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0;
+    }
+    .nh-topbar-left svg { width: 15px; height: 15px; flex-shrink: 0; color: var(--sky); }
+    .nh-topbar-left span {
+      font-size: 12.5px; color: rgba(255,255,255,.62); white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    .nh-topbar-left strong { color: rgba(255,255,255,.88); font-weight: 600; }
+    .nh-topbar-btn {
+      flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid rgba(76,177,255,.55); color: var(--sky);
+      padding: 4px 14px; border-radius: 4px;
+      font-size: 12px; font-weight: 700; transition: all .2s;
+    }
+    .nh-topbar-btn:hover { background: rgba(76,177,255,.15); border-color: var(--sky); }
+    .nh-topbar-btn svg { width: 12px; height: 12px; }
+    @media (max-width: 600px) {
+      .nh-topbar-left span { display: none; }
+    }
+
+    /* INLINE BUTTONS INSIDE DETAIL ITEMS */
+    .di-btn { display: inline-flex; margin-top: 10px; }
+
+    /* BUTTONS INSIDE PH-NOTE */
+    .note-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+    /* BUTTONS INSIDE AE-CARD */
+    .ae-card .ae-btns { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+
+    /* PHASE 6 PANEL — dark graduation style */
+    .panel-inner.panel-grad {
+      background: linear-gradient(135deg, var(--navy) 0%, #002d75 55%, var(--blue-dark) 100%);
+      border-color: transparent; position: relative; overflow: hidden;
+      display: flex; flex-direction: row; gap: 40px; align-items: flex-start;
+    }
+    .panel-inner.panel-grad::before {
+      content: ''; position: absolute; top: -120px; right: -120px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(76,177,255,.09) 0%, transparent 65%);
+      border-radius: 50%; pointer-events: none;
+    }
+
+    /* NEED HELP NAV LINK */
+    .nav-help {
+      font-size: 13px; font-weight: 600; color: var(--muted);
+      padding: 7px 14px; border-radius: 4px;
+      border: 1px solid var(--grey-line);
+      transition: all .2s; white-space: nowrap;
+    }
+    .nav-help:hover { color: var(--blue); border-color: var(--blue); background: var(--light-blue); }
+
+    /* NEED HELP SECTION */
+    .need-help {
+      background: var(--navy); padding: 52px 0;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    .nh-inner {
+      display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px; padding: 36px 40px;
+    }
+    .nh-icon {
+      flex-shrink: 0; width: 56px; height: 56px;
+      background: rgba(76,177,255,.15); border-radius: 14px;
+      display: flex; align-items: center; justify-content: center; color: var(--sky);
+    }
+    .nh-icon svg { width: 26px; height: 26px; }
+    .nh-text { flex: 1; min-width: 240px; }
+    .nh-text h3 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .nh-text p  { font-size: 14px; color: rgba(255,255,255,.55); line-height: 1.72; }
+    .nh-btn {
+      flex-shrink: 0; display: inline-flex; align-items: center; gap: 9px;
+      background: var(--sky); color: var(--navy);
+      padding: 13px 28px; border-radius: 6px;
+      font-size: 14px; font-weight: 700; transition: all .2s; white-space: nowrap;
+    }
+    .nh-btn:hover { background: #fff; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,.2); }
+    .nh-btn svg { width: 16px; height: 16px; }
+    @media (max-width: 700px) {
+      .nh-inner { flex-direction: column; align-items: flex-start; padding: 24px 22px; }
+      .nh-btn { width: 100%; justify-content: center; }
+    }
+
+    /* ROLE CARDS INSIDE PHASE 2 PANEL */
+    .role-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+    .role-card {
+      background: var(--grey-bg); border-radius: 12px;
+      border: 1px solid var(--grey-line);
+      padding: 20px 18px; text-align: center;
+      transition: box-shadow .22s, transform .22s, border-color .22s;
+    }
+    .role-card:hover {
+      box-shadow: 0 8px 24px rgba(0,112,242,.1);
+      transform: translateY(-2px); border-color: var(--blue);
+    }
+    .role-ico {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+    }
+    .role-card h4 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 7px; }
+    .role-card p  { font-size: 12px; color: var(--muted); line-height: 1.6; }
+    @media (max-width: 600px) { .role-grid { grid-template-columns: 1fr; } }
+
+    /* OVERVIEW ACTION STRIP */
+    .ov-cta-strip {
+      margin-top: 44px;
+      padding: 28px 32px;
+      background: linear-gradient(135deg, var(--navy) 0%, #002d75 60%, #0050b5 100%);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .ov-cta-text h4 {
+      font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px;
+    }
+    .ov-cta-text p {
+      font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.5;
+    }
+    .ov-cta-btns {
+      display: flex; gap: 12px; flex-shrink: 1; flex-wrap: wrap; min-width: 0;
+    }
+    .ov-btn-video {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: var(--sky); color: var(--navy);
+      padding: 12px 20px; border-radius: 6px;
+      font-size: 13px; font-weight: 700;
+      transition: all .2s; white-space: nowrap;
+    }
+    .ov-btn-video:hover { background: #fff; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,.2); }
+    .ov-btn-video svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .ov-btn-kpi {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: rgba(255,255,255,.12); color: #fff;
+      border: 1.5px solid rgba(255,255,255,.28);
+      padding: 12px 20px; border-radius: 6px;
+      font-size: 13px; font-weight: 700; backdrop-filter: blur(8px);
+      transition: all .2s; white-space: nowrap;
+    }
+    .ov-btn-kpi:hover { background: rgba(255,255,255,.24); border-color: rgba(255,255,255,.5); transform: translateY(-1px); }
+    .ov-btn-kpi svg { width: 16px; height: 16px; flex-shrink: 0; }
+    @media (max-width: 700px) {
+      .ov-cta-strip { flex-direction: column; align-items: flex-start; padding: 22px 20px; }
+      .ov-cta-btns { width: 100%; }
+      .ov-btn-video, .ov-btn-kpi { flex: 1; justify-content: center; }
+    }
+
+    /* PHASE RESOURCES BAR */
+    .phase-resources {
+      border-top: 1px solid var(--grey-line);
+      margin-top: 0; padding: 24px 52px 28px;
+      background: var(--grey-bg); border-radius: 0 0 16px 16px;
+    }
+    .pr-head {
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      letter-spacing: .1em; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .pr-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pr-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 600;
+      transition: all .2s; white-space: nowrap; text-decoration: none;
+    }
+    .pr-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .pr-link--video {
+      background: #E8F5FE; color: #0070F2; border: 1px solid #B3D9F8;
+    }
+    .pr-link--video:hover { background: #0070F2; color: #fff; border-color: #0070F2; }
+    .pr-link--pdf {
+      background: #FFF0EF; color: #C0392B; border: 1px solid #FACBC8;
+    }
+    .pr-link--pdf:hover { background: #C0392B; color: #fff; border-color: #C0392B; }
+    .pr-link--form {
+      background: #F0FBF0; color: #2E7D32; border: 1px solid #B9E0BA;
+    }
+    .pr-link--form:hover { background: #2E7D32; color: #fff; border-color: #2E7D32; }
+    .pr-link--web {
+      background: #F5F0FF; color: #6B21A8; border: 1px solid #D8B4FE;
+    }
+    .pr-link--web:hover { background: #6B21A8; color: #fff; border-color: #6B21A8; }
+    .pr-link--doc {
+      background: #FFF8E1; color: #E65100; border: 1px solid #FFCC80;
+    }
+    .pr-link--doc:hover { background: #E65100; color: #fff; border-color: #E65100; }
+
+    /* HERO RESOURCE LINKS */
+    .hero-resources {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+      margin-top: -20px; margin-bottom: 40px;
+    }
+    .hero-res-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 20px; border-radius: 20px; font-size: 13px; font-weight: 500;
+      background: rgba(255,255,255,.1); color: rgba(255,255,255,.75);
+      border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(8px);
+      transition: all .2s;
+    }
+    .hero-res-link:hover {
+      background: rgba(255,255,255,.22); color: #fff;
+      border-color: rgba(255,255,255,.4);
+    }
+    .hero-res-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    @media (max-width: 960px) {
+      .phase-resources { padding: 20px 28px 24px; }
+    }
+    @media (max-width: 600px) {
+      .phase-resources { padding: 16px 20px 20px; }
+      .pr-links { gap: 8px; }
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="nh-topbar" id="nh-topbar">
+  <div class="container">
+    <div class="nh-topbar-left">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <span>Need operational support with tools or errors? <strong>Contact Partner Support</strong> — faster resolution than your Incubation Manager.</span>
+    </div>
+    <a href="https://support.sap.com/en/index.html" target="_blank" class="nh-topbar-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Partner Support
+    </a>
+  </div>
+</div>
+<nav id="main-nav">
+  <div class="nav-left">
+    <img class="nav-logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI4LjMuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA0MTIuNCAyMDQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQxMi40IDIwNDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtmaWxsOnVybCgjU1ZHSURfMV8pO30KCS5zdDF7ZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7ZmlsbDojRkZGRkZGO30KPC9zdHlsZT4KPGc+CgkKCQk8bGluZWFyR3JhZGllbnQgaWQ9IlNWR0lEXzFfIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjIwNi4xOSIgeTE9IjIwNiIgeDI9IjIwNi4xOSIgeTI9IjIiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgLTEgMCAyMDYpIj4KCQk8c3RvcCAgb2Zmc2V0PSIwIiBzdHlsZT0ic3RvcC1jb2xvcjojMDBCOEYxIi8+CgkJPHN0b3AgIG9mZnNldD0iMi4wMDAwMDBlLTAyIiBzdHlsZT0ic3RvcC1jb2xvcjojMDFCNkYwIi8+CgkJPHN0b3AgIG9mZnNldD0iMC4zMSIgc3R5bGU9InN0b3AtY29sb3I6IzBEOTBEOSIvPgoJCTxzdG9wICBvZmZzZXQ9IjAuNTgiIHN0eWxlPSJzdG9wLWNvbG9yOiMxNzc1QzgiLz4KCQk8c3RvcCAgb2Zmc2V0PSIwLjgyIiBzdHlsZT0ic3RvcC1jb2xvcjojMUM2NUJGIi8+CgkJPHN0b3AgIG9mZnNldD0iMSIgc3R5bGU9InN0b3AtY29sb3I6IzFFNUZCQiIvPgoJPC9saW5lYXJHcmFkaWVudD4KCTxwb2x5bGluZSBjbGFzcz0ic3QwIiBwb2ludHM9IjAsMjA0IDIwOC40LDIwNCA0MTIuNCwwIDAsMCAwLDIwNCAJIi8+Cgk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMjQ0LjcsMzguNGgtNDAuNnY5Ni41bC0zNS41LTk2LjZoLTM1LjJsLTMwLjMsODAuN0MxMDAsOTguNyw3OSw5MS43LDYyLjQsODYuNEM1MS41LDgyLjksMzkuOCw3Ny43LDQwLDcyCgkJYzAuMS00LjcsNi4yLTksMTguNC04LjRjOC4yLDAuNCwxNS40LDEuMSwyOS43LDhsMTQuMS0yNC41Yy0xMy4xLTYuNi0zMS4yLTEwLjktNDYtMTAuOWgtMC4xYy0xNy4zLDAtMzEuNyw1LjYtNDAuNiwxNC44CgkJYy02LjIsNi4zLTkuNywxNC44LTkuNywyMy43QzUuNSw4Ny4yLDEwLjEsOTYsMTkuNywxMDNjOC4xLDUuOSwxOC41LDkuOCwyNy42LDEyLjZjMTEuMywzLjUsMjAuNSw2LjUsMjAuNCwxMwoJCWMtMC4xLDIuNC0xLDQuNy0yLjcsNi40Yy0yLjgsMi45LTcuMSw0LTEzLjEsNC4xYy0xMS41LDAuMi0yMC0xLjYtMzMuNi05LjZMNS44LDE1NC40YzE0LDgsMjkuOSwxMi4yLDQ2LDEyLjJoMi4xCgkJYzE0LjItMC4yLDI1LjctNC4zLDM0LjktMTEuN2MwLjUtMC40LDEtMC44LDEuNS0xLjNsLTQuMSwxMC45SDEyM2w2LjItMTguOGM3LDIuMywxNC4zLDMuNSwyMS43LDMuNGM3LjIsMCwxNC4zLTEuMSwyMS4yLTMuMgoJCWw2LDE4LjZoNjAuMXYtMzloMTMuMWMzMS43LDAsNTAuNS0xNi4yLDUwLjUtNDMuMkMzMDEuNyw1Mi4yLDI4My41LDM4LjQsMjQ0LjcsMzguNHogTTE1MC45LDEyMWMtNC40LDAtOC44LTAuNy0xMy0yLjNsMTIuOS00MC42CgkJaDAuMmwxMi42LDQwLjdDMTU5LjYsMTIwLjMsMTU1LjIsMTIxLDE1MC45LDEyMXogTTI0Ny4xLDk3LjdoLTguOVY2NC45aDguOWMxMS45LDAsMjEuNCw0LDIxLjQsMTYuMQoJCUMyNjguNSw5My43LDI1OSw5Ny42LDI0Ny4xLDk3LjciLz4KPC9nPgo8L3N2Zz4K" alt="SAP" />
+    <div class="nav-divider"></div>
+    <span class="nav-label">PartnerEdge Incubation Program</span>
+  </div>
+  <div class="nav-links">
+    <a href="#overview" data-section="overview">Overview</a>
+    <a href="#journey" data-section="journey">The Journey</a>
+    <a href="#faq" data-section="faq">FAQ</a>
+  </div>
+  <a href="#need-help" class="nav-help">Need Help?</a>
+  <a href="#cta" class="nav-cta">Get Started</a>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-blob1"></div><div class="hero-blob2"></div><div class="hero-grid"></div>
+  <div class="hero-body">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="badge-dot"></span>2026 Edition &nbsp;&middot;&nbsp; Global Partner Recruitment &amp; Incubation CoE</div>
+      <h1>Accelerating Your Success<br>as an <em>SAP Partner</em></h1>
+      <p class="hero-sub">SAP PartnerEdge – Incubation Program</p>
+      <p class="hero-desc">A structured, guided 12-month journey that takes you from onboarding to your first closed deal — with a dedicated Incubation Manager and expert SAP support at every step.</p>
+      <div class="hero-actions">
+        <a href="#journey" class="btn-primary">Explore the Journey</a>
+        <a href="#overview" class="btn-ghost">Learn More</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="stat-val" data-target="12" data-suffix="">0</div><div class="stat-lbl">Month Program</div></div>
+        <div class="hero-stat"><div class="stat-val" data-target="6" data-suffix="">0</div><div class="stat-lbl">Structured Phases</div></div>
+        <div class="hero-stat"><div class="stat-val" data-target="1" data-suffix=":1">0</div><div class="stat-lbl">Incubation Manager</div></div>
+        <div class="hero-stat"><div class="stat-val" data-target="100" data-suffix="%">0</div><div class="stat-lbl">Expert Guided</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="overview" id="overview">
+  <div class="container">
+    <div class="ov-grid">
+      <div class="fade-up">
+        <div class="s-label">About the Program</div>
+        <h2 class="s-title">Built to Accelerate Your Partnership from Day One</h2>
+        <p class="s-lead">The SAP Partner Incubation Program combines structured enablement, hands-on support, and expert guidance — ensuring you are fully equipped to grow your SAP business with confidence.</p>
+        <ul class="ov-list">
+          <li class="ov-item">
+            <div class="ov-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <div><strong>Operational in 15 Days</strong>Your account fully configured and team ready to sell within the first two weeks of signing.</div>
+          </li>
+          <li class="ov-item">
+            <div class="ov-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div><strong>First Deal in 12 Months</strong>Clear milestones and dedicated SAP support to guide you from pipeline creation to first closed deal.</div>
+          </li>
+          <li class="ov-item">
+            <div class="ov-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div><strong>Dedicated Incubation Manager</strong>Your personal SAP expert, committed to your success throughout the entire program.</div>
+          </li>
+          <li class="ov-item">
+            <div class="ov-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <div><strong>Proven Pipeline Generation</strong>Structured demand generation and Digital Selling Workshops to build real, qualified pipeline.</div>
+          </li>
+        </ul>
+      </div>
+      <div class="ov-cards fade-up d2">
+        <div class="ov-card">
+          <div class="ov-card-head">
+            <div class="ov-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <h3>Digital Self-Paced Learning</h3>
+          </div>
+          <p>A curated library of online courses, product training, and sales enablement materials — available on demand, at your own pace.</p>
+        </div>
+        <div class="ov-card">
+          <div class="ov-card-head">
+            <div class="ov-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <h3>Live Virtual Workshops</h3>
+          </div>
+          <p>Expert-led sessions covering SAP solutions, sales techniques, and demand generation — with real-time coaching from SAP specialists.</p>
+        </div>
+        <div class="ov-card">
+          <div class="ov-card-head">
+            <div class="ov-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+            <h3>Development Fund Eligibility</h3>
+          </div>
+          <p>Eligible partners can leverage SAP-funded enablement through the Development Funds program to accelerate capability-building at reduced cost.</p>
+        </div>
+
+    <div class="ov-cta-strip fade-up">
+      <div class="ov-cta-text">
+        <h4>Start with the Big Picture</h4>
+        <p>Watch the program overview video and review your Incubation KPIs before diving into each phase.</p>
+      </div>
+      <div class="ov-cta-btns">
+        <a href="https://dam.sap.com/mac/app/p/video/asset/preview/uo77fZq?ltr=a&rc=10&doi=SAP1278619"
+           target="_blank" class="ov-btn-video">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Watch Program Overview
+        </a>
+        <a href="https://d.dam.sap.com/a/4uky6qF/Partner_Incubation_KPI_s.pdf?rc=10&inline=true&doi=SAP1323599"
+           target="_blank" class="ov-btn-kpi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Review Incubation KPIs
+        </a>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="journey" id="journey">
+  <div class="container">
+    <div class="journey-hdr fade-up">
+      <div class="s-label">The 6-Phase Journey</div>
+      <h2 class="s-title">Your Path from Onboarding to Graduation</h2>
+      <p class="s-lead">A carefully designed 12-month program with clear milestones, expert support, and actionable objectives at every stage. Select a phase to explore in detail.</p>
+    </div>
+    <div class="phase-nav" role="tablist">
+      <button class="phase-tab active" data-phase="0" role="tab">
+        <div class="tab-num">1</div>
+        <span class="tab-label">Operational</span>
+        <span class="tab-month">Month 1</span>
+      </button>
+      <button class="phase-tab" data-phase="1" role="tab">
+        <div class="tab-num">2</div>
+        <span class="tab-label">Enablement</span>
+        <span class="tab-month">Month 2</span>
+      </button>
+      <button class="phase-tab" data-phase="2" role="tab">
+        <div class="tab-num">3</div>
+        <span class="tab-label">Execution</span>
+        <span class="tab-month">Month 3–6</span>
+      </button>
+      <button class="phase-tab" data-phase="3" role="tab">
+        <div class="tab-num">4</div>
+        <span class="tab-label">Review</span>
+        <span class="tab-month">Month 7</span>
+      </button>
+      <button class="phase-tab" data-phase="4" role="tab">
+        <div class="tab-num">5</div>
+        <span class="tab-label">Close Deal</span>
+        <span class="tab-month">Month 7–10</span>
+      </button>
+      <button class="phase-tab" data-phase="5" role="tab">
+        <div class="tab-num">6</div>
+        <span class="tab-label">Graduate</span>
+        <span class="tab-month">Month 10–12</span>
+      </button>
+    </div>
+    <div class="phase-progress">
+      <div class="pp-bar"><div class="pp-fill" id="pp-fill" style="width:17%"></div></div>
+      <div class="pp-label"><span id="pp-text">Phase 1 of 6 &mdash; Month 1</span><strong id="pp-pct">17%</strong></div>
+    </div>
+    <div class="phase-panels">
+      <div class="phase-panel active" data-panel="0">
+        <div class="panel-inner">
+          <div class="panel-left">
+            <div class="ph-header">
+              <div class="ph-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+              <div class="ph-meta">
+                <div class="ph-timing">Month 1</div>
+                <h3>Get Operational Fast</h3>
+              </div>
+            </div>
+            <p>Hit the ground running. From the moment you sign your agreements, the clock starts. Your goal: account fully configured, team enabled with platform access, and your organization ready to engage customers — all within 15 days.</p>
+            <p>Work closely with your dedicated Incubation Manager, who will ensure every essential step is completed on time and without friction.</p>
+            <div class="ph-note"><strong>Key Milestone</strong>Achieve Operational status within 15 days of signing by completing the mandatory onboarding checklist.</div>
+          </div>
+          <div class="panel-right">
+            <h4>What You Will Complete</h4>
+            <ul class="dl">
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="di-body"><div class="di-txt"><strong>Welcome to Your Partnership</strong>Understand your new SAP partnership, available resources, and what to expect across the program.</div><a href="https://dam.sap.com/mac/app/p/video/asset/preview/s6bo7GX?ltr=a&rc=10&doi=SAP1146043" target="_blank" class="pr-link pr-link--video di-btn-r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Video</a></div></li>
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="di-body"><div class="di-txt"><strong>Managing Access</strong>Set up and manage user accounts, permissions, and access to all SAP systems and platforms.</div><a href="https://dam.sap.com/mac/app/p/video/asset/preview/Stw2HbM?ltr=a&rc=10&doi=SAP1322131" target="_blank" class="pr-link pr-link--video di-btn-r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Video</a></div></li>
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div class="di-body"><div class="di-txt"><strong>Mandatory Operational Steps</strong>Complete the full onboarding checklist required before you can begin selling SAP solutions.</div><a href="https://dam.sap.com/mac/app/p/video/asset/preview/jgnQceb?ltr=a&rc=10&doi=SAP1322132" target="_blank" class="pr-link pr-link--video di-btn-r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Video</a></div></li>
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="di-body"><div class="di-txt"><strong>Your Support Team</strong>Meet your Incubation Manager and understand your broader support structure within SAP.</div><a href="https://dam.sap.com/mac/app/p/video/asset/preview/GDTqbzG?ltr=a&rc=10&doi=SAP1322134" target="_blank" class="pr-link pr-link--video di-btn-r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Video</a></div></li>
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="di-body"><div class="di-txt"><strong>Making the Most of Your Partnership</strong>Discover tools, benefits, and strategies to maximize the value of your SAP PartnerEdge membership.</div><a href="https://dam.sap.com/mac/app/p/video/asset/preview/FypLnYq?ltr=a&rc=10&doi=SAP1322135" target="_blank" class="pr-link pr-link--video di-btn-r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Video</a></div></li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase-resources">
+          <div class="pr-head">Resources &amp; Links</div>
+          <div class="pr-links">
+            <a href="https://dam.sap.com/mac/app/p/video/asset/preview/s6bo7GX?ltr=a&rc=10&doi=SAP1146043" target="_blank" class="pr-link pr-link--video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Welcome to Your Partnership</a> <a href="https://dam.sap.com/mac/app/p/video/asset/preview/Stw2HbM?ltr=a&rc=10&doi=SAP1322131" target="_blank" class="pr-link pr-link--video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Managing Access</a> <a href="https://dam.sap.com/mac/app/p/video/asset/preview/jgnQceb?ltr=a&rc=10&doi=SAP1322132" target="_blank" class="pr-link pr-link--video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Mandatory Steps to Operational</a> <a href="https://dam.sap.com/mac/app/p/video/asset/preview/GDTqbzG?ltr=a&rc=10&doi=SAP1322134" target="_blank" class="pr-link pr-link--video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Your Support Team</a> <a href="https://dam.sap.com/mac/app/p/video/asset/preview/FypLnYq?ltr=a&rc=10&doi=SAP1322135" target="_blank" class="pr-link pr-link--video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Making the Most of Your Partnership</a> <a href="https://sap-my.sharepoint.com/:b:/r/personal/stephania_majure_sap_com/Documents/2.%20SAP%20Partner%20Recruitment%20and%20Onboarding%20Team%20-%20Offical%20Assets/2.%20INCUBATION/1.%20Digital%20Journey/Next%20Versions%20Draft/Onboarding%20Check%20List%20and%20Links/Partner%20Onboarding%20Checklist.pdf?csf=1&web=1&e=PIhe1E" target="_blank" class="pr-link pr-link--doc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Partner Onboarding Checklist</a> <a href="https://d.dam.sap.com/a/oArkrmm/New_Partner_Flyer-_Onboarding__1.pdf?rc=10&inline=true&doi=SAP1323629" target="_blank" class="pr-link pr-link--pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> New Partner Onboarding Flyer</a> <a href="https://www.sap.com/uk/partners/partner-program/sell.html" target="_blank" class="pr-link pr-link--web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> SAP PartnerEdge Sell</a>
+          </div>
+        </div>
+      </div>
+      <div class="phase-panel" data-panel="1">
+        <div class="panel-inner">
+          <div class="panel-left">
+            <div class="ph-header">
+              <div class="ph-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+              <div class="ph-meta">
+                <div class="ph-timing">Month 2</div>
+                <h3>Build Your SAP Sales Foundation</h3>
+              </div>
+            </div>
+            <p>Move beyond onboarding and develop the capabilities required to successfully position, sell, and deliver SAP solutions. Together with your Incubation Manager, define a tailored enablement journey based on your business model and growth ambitions.</p>
+            <p>Access digital self-paced learning, live virtual workshops, personalized coaching sessions, and in-person enablement experiences — all designed for your specific roles.</p>
+            <div class="ph-note"><strong>Development Funds</strong>Eligible partners can request SAP-funded enablement through the Development Funds program. Review the criteria and request process with your Incubation Manager.<div class="note-btns"><a href="https://d.dam.sap.com/a/urkoeha/NPP-_DF_-_May_2026-_For_Partners.pdf?rc=10&inline=true&doi=SAP1317892" target="_blank" class="pr-link pr-link--pdf di-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Criteria &amp; Request</a> <a href="https://d.dam.sap.com/s/p/x/hjMmHGo/Development_Funds_-_Entry_and_Eligibility_Criteria_May_2026.pdf?rc=16&inline=true" target="_blank" class="pr-link pr-link--pdf di-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Eligibility Criteria</a></div></div>
+          </div>
+          <div class="panel-right">
+            <h4>Enablement by Role</h4>
+            <div class="role-grid">
+              <div class="role-card">
+                <div class="role-ico" style="background:#E1F4FF;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0070F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                </div>
+                <h4>Sales</h4>
+                <p>Solution positioning, value selling, and SAP portfolio mastery to drive deal creation and closure.</p>
+              </div>
+              <div class="role-card">
+                <div class="role-ico" style="background:#E8F5E9;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+                </div>
+                <h4>Presales</h4>
+                <p>Deep product expertise and demonstration capabilities to support compelling customer engagements.</p>
+              </div>
+              <div class="role-card">
+                <div class="role-ico" style="background:#FFF8E1;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F57F17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.09 6.09l.87-.87a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <h4>CEE</h4>
+                <p>Customer relationship strategies and account development skills for long-term retention and expansion.</p>
+              </div>
+              <div class="role-card">
+                <div class="role-ico" style="background:#FCE4EC;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C62828" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </div>
+                <h4>BDR</h4>
+                <p>Outbound prospecting, campaign execution, and pipeline generation — Digital Selling Workshop mandatory.</p>
+              </div>
+              <div class="role-card role-span">
+                <div class="role-ico" style="background:#E0F2F1;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00695C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14M22 12H2M12 2v20"/></svg>
+                </div>
+                <h4>Delivery</h4>
+                <p>Implementation methodology, project delivery best practices, and technical skills to successfully deliver SAP solutions to customers.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="also-explore">
+          <div class="ae-label">Also Explore</div>
+          <div class="ae-grid">
+            <div class="ae-card ae-sap">
+              <div class="ae-ico">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+              </div>
+              <h4>New to SAP?</h4>
+              <p>Explore the most suitable enablement offering to understand the SAP world — from foundational concepts to solution overviews tailored for those beginning their SAP journey.</p>
+              <div class="ae-btns"><a href="https://partnerbenefitscatalog.sap.com/Partner-Benefits-Catalog/Demand-Generation/Content-Creation/Value-Proposition%2C-Messaging/LiftOff90-Program---Sprint/p/1002533" target="_blank" class="pr-link pr-link--web di-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> LiftOff90 Program</a></div>
+            </div>
+            <div class="ae-card ae-ai">
+              <div class="ae-ico">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6B21A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12"/><path d="M12 8v4l3 3"/><path d="M2 2l4.5 4.5M22 2l-4.5 4.5"/></svg>
+              </div>
+              <h4>AI Enablement Offerings</h4>
+              <p>Get ready for the Autonomous Enterprise. Explore SAP's AI-focused enablement catalog to build the skills needed to position, sell, and deliver AI-powered SAP solutions.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-resources">
+          <div class="pr-head">Resources &amp; Links</div>
+          <div class="pr-links">
+            <a href="https://d.dam.sap.com/a/urkoeha/NPP-_DF_-_May_2026-_For_Partners.pdf?rc=10&inline=true&doi=SAP1317892" target="_blank" class="pr-link pr-link--pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Development Funds – Criteria &amp; Request</a> <a href="https://d.dam.sap.com/s/p/x/hjMmHGo/Development_Funds_-_Entry_and_Eligibility_Criteria_May_2026.pdf?rc=16&inline=true" target="_blank" class="pr-link pr-link--pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Development Funds – Eligibility Criteria</a> <a href="https://partnerbenefitscatalog.sap.com/Partner-Benefits-Catalog/Demand-Generation/Content-Creation/Value-Proposition%2C-Messaging/LiftOff90-Program---Sprint/p/1002533" target="_blank" class="pr-link pr-link--web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> LiftOff90 Program</a>
+          </div>
+        </div>
+      </div>
+      <div class="phase-panel" data-panel="2">
+        <div class="panel-inner">
+          <div class="panel-left">
+            <div class="ph-header">
+              <div class="ph-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+              <div class="ph-meta">
+                <div class="ph-timing">Month 3 – 6</div>
+                <h3>Execution: Pipeline &amp; Demand Gen</h3>
+              </div>
+            </div>
+            <p>This is where enablement turns into real market execution. The focus shifts from learning to action — supporting you in building qualified pipeline through structured demand generation and outbound execution.</p>
+            <p>Partners participate in SAP's Digital Selling and Demand Generation framework: a high-touch approach to plan, launch, and execute outbound campaigns with SAP expert guidance.</p>
+            <div class="ph-note"><strong>BDR Attendance is Mandatory</strong>The assigned BDR must complete all workshop sessions and lead outbound campaign execution. Attendance is tracked and a certificate of completion is issued upon successful participation.</div>
+          </div>
+          <div class="panel-right">
+            <h4>Digital Selling Workshop — What to Expect</h4>
+            <ul class="dl">
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><strong>Workshop Registration</strong>Register your sales team. BDR participation is mandatory; the full sales team is welcome to join.<a href="https://airtable.com/appHKNqTW9OsFk5CY/paglnpppjauKwd1lT/form" target="_blank" class="pr-link pr-link--form di-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Register for Digital Selling Workshop</a></div></li>
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><strong>Campaign Strategy &amp; Activation</strong>Develop your outbound campaign strategy with SAP guidance and activate it across your target accounts.</div></li>
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><strong>Multi-Touch Outbound Execution</strong>Execute structured multi-touch outbound sequences to generate qualified leads and opportunities.</div></li>
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div><div><strong>Certification of Completion</strong>Upon successful completion of all workshop sessions, receive an official SAP certificate of participation.</div></li>
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div><strong>R2R Framework (Ready to Revenue)</strong>Structured approach connecting demand generation activities directly to pipeline creation and revenue outcomes.</div></li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase-resources">
+          <div class="pr-head">Resources &amp; Links</div>
+          <div class="pr-links">
+            <a href="https://airtable.com/appHKNqTW9OsFk5CY/paglnpppjauKwd1lT/form" target="_blank" class="pr-link pr-link--form"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Register for Digital Selling Workshop</a> <a href="https://dam.sap.com/mac/u/a/cGgUjNi.htm?rc=10" target="_blank" class="pr-link pr-link--video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Introduction Video</a> <a href="https://dam.sap.com/mac/u/a/QFpZpGt?rc=10&doi=SAP1278848" target="_blank" class="pr-link pr-link--pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Digital Selling One-Pager</a> <a href="https://d.dam.sap.com/a/2rbcLvP?rc=10&doi=SAP1278849" target="_blank" class="pr-link pr-link--pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Workshop Reference Guide</a>
+          </div>
+        </div>
+      </div>
+      <div class="phase-panel" data-panel="3">
+        <div class="panel-inner">
+          <div class="panel-left">
+            <div class="ph-header">
+              <div class="ph-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+              <div class="ph-meta">
+                <div class="ph-timing">Month 7</div>
+                <h3>Mid-Year Business Review</h3>
+              </div>
+            </div>
+            <p>At the midpoint of the program, a formal Business Review session is organized to review progress, assess execution, and align on priorities for the second half of the journey.</p>
+            <p>The session brings together your team and relevant SAP stakeholders — including your Incubation Manager and regional Market Unit representatives.</p>
+            <div class="ph-note"><strong>Primary Goal</strong>Reinforce the main program objective: pipeline generation and first deal closure within 12 months from program start.</div>
+          </div>
+          <div class="panel-right">
+            <h4>Session Agenda (60 Minutes)</h4>
+            <ul class="dl">
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><strong>Partner Presentation – 30 min</strong>Present program progress, GTM activities, pipeline status, and key opportunities under consideration.</div></li>
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><strong>SAP Review &amp; Expectations – 20 min</strong>SAP provides a structured assessment of program progress, delivers feedback, and aligns on second-half priorities.</div></li>
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><strong>Q&amp;A &amp; Open Discussion – 10 min</strong>Open forum for questions, clarification on next steps, and broader stakeholder alignment.</div></li>
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><strong>Business Review Template</strong>Use the structured Business Review template provided by SAP to prepare and document the session outcomes.<a href="https://d.dam.sap.com/a/fLqKbT9?rc=10&doi=SAP1310552" target="_blank" class="pr-link pr-link--doc di-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Download Template</a></div></li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase-resources">
+          <div class="pr-head">Resources &amp; Links</div>
+          <div class="pr-links">
+            <a href="https://d.dam.sap.com/a/fLqKbT9?rc=10&doi=SAP1310552" target="_blank" class="pr-link pr-link--doc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Business Review Template</a>
+          </div>
+        </div>
+      </div>
+      <div class="phase-panel" data-panel="4">
+        <div class="panel-inner">
+          <div class="panel-left">
+            <div class="ph-header">
+              <div class="ph-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+              <div class="ph-meta">
+                <div class="ph-timing">Month 7 – 10</div>
+                <h3>Close Your First Deal</h3>
+              </div>
+            </div>
+            <p>As opportunities mature, the focus turns to converting pipeline into results. This phase provides targeted support around deal execution, registration, and closure.</p>
+            <p>You may also benefit from optional deal qualification workshops and best-practice guidance, designed to support you through your first SAP deal closures and set the foundation for repeat success.</p>
+            <div class="ph-note"><strong>Accelerated Support Available</strong>If a significant or time-critical opportunity arises earlier in the journey, deal support can be prioritized and brought forward. This phase will be tailored to your specific needs.</div>
+          </div>
+          <div class="panel-right">
+            <h4>Deal Lifecycle Steps</h4>
+            <ul class="dl">
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div><div class="di-body"><div class="di-txt"><strong>Define Deal Scopes</strong>Use the SAP pricing application to scope and configure your deals accurately from the outset.</div><a href="https://partneredge.sap.com/en/partnership/sales/deal_lifecycle/pricing.html" target="_blank" class="pr-link pr-link--web di-btn-r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Pricing App</a></div></li>
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div class="di-body"><div class="di-txt"><strong>Register Your Deals</strong>Submit deal registrations through the SAP deal registration application to secure your opportunity and access SAP support.</div><a href="https://partneredge.sap.com/en/partnership/sales/deal_lifecycle/deal-registration.html" target="_blank" class="pr-link pr-link--web di-btn-r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Deal Registration App</a></div></li>
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div class="di-body"><div class="di-txt"><strong>Manage Deals in the Deal Manager</strong>Track deal progression, stakeholder activity, and next steps within the SAP deal manager application.</div><a href="https://partneredge.sap.com/en/partnership/sales/deal_lifecycle/deal-managment.html" target="_blank" class="pr-link pr-link--web di-btn-r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Deal Manager App</a></div></li>
+              <li class="di"><div class="d-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="di-body"><div class="di-txt"><strong>Place Orders</strong>Execute final order placement through the SAP place order application once deal closure is confirmed.</div><a href="https://partneredge.sap.com/en/partnership/sales/deal_lifecycle/ordering-licenses.html" target="_blank" class="pr-link pr-link--web di-btn-r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Place Order App</a></div></li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase-resources">
+          <div class="pr-head">Resources &amp; Links</div>
+          <div class="pr-links">
+            <a href="https://partneredge.sap.com/en/partnership/sales/deal_lifecycle/pricing.html" target="_blank" class="pr-link pr-link--web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Pricing App</a> <a href="https://partneredge.sap.com/en/partnership/sales/deal_lifecycle/deal-registration.html" target="_blank" class="pr-link pr-link--web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Deal Registration App</a> <a href="https://partneredge.sap.com/en/partnership/sales/deal_lifecycle/deal-managment.html" target="_blank" class="pr-link pr-link--web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Deal Manager App</a> <a href="https://partneredge.sap.com/en/partnership/sales/deal_lifecycle/ordering-licenses.html" target="_blank" class="pr-link pr-link--web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Place Order App</a>
+          </div>
+        </div>
+      </div>
+      <div class="phase-panel" data-panel="5">
+        <div class="panel-inner panel-grad">
+          <div class="grad-text" style="flex:1;min-width:220px;position:relative;z-index:1;">
+            <div class="s-label" style="color:var(--sky);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:14px;">Phase 6 — Graduation</div>
+            <h2 class="s-title" style="color:#fff;font-size:clamp(20px,2.6vw,28px);margin-bottom:18px;">Graduate and Scale Your SAP Business</h2>
+            <p style="color:rgba(255,255,255,.58);font-size:14px;line-height:1.78;margin-bottom:14px;">The final phase marks the transition from incubation into a long-term SAP partnership. Together with your Incubation Manager, you will review the full journey, results achieved, and overall readiness to scale.</p>
+            <p style="color:rgba(255,255,255,.58);font-size:14px;line-height:1.78;margin-bottom:14px;">Partners who successfully complete the program receive an official SAP Certificate of Completion — formally recognizing their progress, commitment, and readiness to operate as a capable SAP partner.</p>
+            <p style="color:rgba(255,255,255,.58);font-size:14px;line-height:1.78;">Following graduation, and based on successful outcomes, partners are transitioned to the appropriate SAP engagement model, typically including assignment of a dedicated Partner Manager to support continued growth.</p>
+          </div>
+          <div class="grad-card" style="position:relative;z-index:1;flex-shrink:0;">
+            <div class="cert-circle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <h3>Certificate of Completion</h3>
+            <p class="sub">SAP Partner Incubation Program</p>
+            <ul class="cert-list">
+              <li><div class="c-chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>12-Month Program Successfully Completed</li>
+              <li><div class="c-chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>All Incubation KPIs Achieved</li>
+              <li><div class="c-chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>First SAP Deal Closed</li>
+              <li><div class="c-chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Transition to Dedicated Partner Manager</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="faq-sticky fade-up">
+        <div class="s-label">FAQ</div>
+        <h2 class="s-title">Frequently Asked Questions</h2>
+        <p class="s-lead">Everything you need to know about the SAP PartnerEdge Incubation Program before getting started.</p>
+      </div>
+      <div class="faq-list fade-up d2">
+        <div class="faq-item">
+          <button class="faq-q">Who is eligible for the Incubation Program?<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">The SAP Partner Incubation Program is designed for new and existing SAP partners looking to accelerate their go-to-market activities. Both new-to-SAP organizations and existing partners expanding into new solution areas may be eligible. Contact your regional SAP Partner Recruitment team to confirm eligibility.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How long does the program last?<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">The program runs for 12 months from the date your partnership agreements are signed. It is structured into 6 phases, each with specific objectives, milestones, and expected outcomes to keep your journey on track.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What is the role of the Incubation Manager?<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Your dedicated Incubation Manager is your primary SAP contact throughout the program. They guide you through each phase, help you navigate SAP systems and resources, support your enablement planning, facilitate business reviews, and provide coaching during deal execution.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What are Development Funds and how do I access them?<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Development Funds (DF) are SAP-funded investments available to eligible partners to offset the cost of approved enablement activities. Eligibility criteria and the request and claim process are reviewed with your Incubation Manager during Phase 2. Not all partners are eligible; specific conditions apply.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Is attendance at the Digital Selling Workshop mandatory?<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Yes — BDR (Business Development Representative) attendance and completion of all Digital Selling Workshop sessions is mandatory as part of the Incubation Program. The full sales team is encouraged to register, but BDR participation is tracked and required for program completion and certification.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What happens after I graduate from the program?<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Upon successful graduation, partners are transitioned to the appropriate SAP engagement model. In most cases, this includes the assignment of a dedicated Partner Manager who will take over the day-to-day business relationship and support continued growth beyond the Incubation Program. You will also receive an official SAP Certificate of Completion.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What KPIs will I be measured against?<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Incubation KPIs are defined at the start of the program in collaboration with your Incubation Manager. They typically cover milestones such as achieving Operational status, completing enablement activities, building a qualified pipeline, and closing your first SAP deal within 12 months. These KPIs define your readiness to graduate.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="cta">
+  <div class="container">
+    <div class="s-label">Get Started Today</div>
+    <h2 class="s-title">Ready to Accelerate Your SAP Partnership?</h2>
+    <p>The SAP PartnerEdge Incubation Program gives you everything you need to build capability, generate pipeline, and close your first deal — with dedicated expert support at every stage of the journey.</p>
+    <div class="cta-actions">
+      <a href="https://www.sap.com/partners.html" class="btn-outline" target="_blank">Explore SAP PartnerEdge</a>
+    </div>
+  </div>
+</section>
+
+<section class="need-help" id="need-help">
+  <div class="container">
+    <div class="nh-inner">
+      <div class="nh-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div class="nh-text">
+        <h3>Need Help?</h3>
+        <p>For operational support with tools, errors, or struggles — contact Partner Support directly. Resolution will be faster and more effective than contacting your Incubation Manager.</p>
+      </div>
+      <a href="https://support.sap.com/en/index.html" target="_blank" class="nh-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Partner Support
+      </a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="container">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI4LjMuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA0MTIuNCAyMDQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQxMi40IDIwNDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtmaWxsOnVybCgjU1ZHSURfMV8pO30KCS5zdDF7ZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7ZmlsbDojRkZGRkZGO30KPC9zdHlsZT4KPGc+CgkKCQk8bGluZWFyR3JhZGllbnQgaWQ9IlNWR0lEXzFfIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjIwNi4xOSIgeTE9IjIwNiIgeDI9IjIwNi4xOSIgeTI9IjIiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgLTEgMCAyMDYpIj4KCQk8c3RvcCAgb2Zmc2V0PSIwIiBzdHlsZT0ic3RvcC1jb2xvcjojMDBCOEYxIi8+CgkJPHN0b3AgIG9mZnNldD0iMi4wMDAwMDBlLTAyIiBzdHlsZT0ic3RvcC1jb2xvcjojMDFCNkYwIi8+CgkJPHN0b3AgIG9mZnNldD0iMC4zMSIgc3R5bGU9InN0b3AtY29sb3I6IzBEOTBEOSIvPgoJCTxzdG9wICBvZmZzZXQ9IjAuNTgiIHN0eWxlPSJzdG9wLWNvbG9yOiMxNzc1QzgiLz4KCQk8c3RvcCAgb2Zmc2V0PSIwLjgyIiBzdHlsZT0ic3RvcC1jb2xvcjojMUM2NUJGIi8+CgkJPHN0b3AgIG9mZnNldD0iMSIgc3R5bGU9InN0b3AtY29sb3I6IzFFNUZCQiIvPgoJPC9saW5lYXJHcmFkaWVudD4KCTxwb2x5bGluZSBjbGFzcz0ic3QwIiBwb2ludHM9IjAsMjA0IDIwOC40LDIwNCA0MTIuNCwwIDAsMCAwLDIwNCAJIi8+Cgk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMjQ0LjcsMzguNGgtNDAuNnY5Ni41bC0zNS41LTk2LjZoLTM1LjJsLTMwLjMsODAuN0MxMDAsOTguNyw3OSw5MS43LDYyLjQsODYuNEM1MS41LDgyLjksMzkuOCw3Ny43LDQwLDcyCgkJYzAuMS00LjcsNi4yLTksMTguNC04LjRjOC4yLDAuNCwxNS40LDEuMSwyOS43LDhsMTQuMS0yNC41Yy0xMy4xLTYuNi0zMS4yLTEwLjktNDYtMTAuOWgtMC4xYy0xNy4zLDAtMzEuNyw1LjYtNDAuNiwxNC44CgkJYy02LjIsNi4zLTkuNywxNC44LTkuNywyMy43QzUuNSw4Ny4yLDEwLjEsOTYsMTkuNywxMDNjOC4xLDUuOSwxOC41LDkuOCwyNy42LDEyLjZjMTEuMywzLjUsMjAuNSw2LjUsMjAuNCwxMwoJCWMtMC4xLDIuNC0xLDQuNy0yLjcsNi40Yy0yLjgsMi45LTcuMSw0LTEzLjEsNC4xYy0xMS41LDAuMi0yMC0xLjYtMzMuNi05LjZMNS44LDE1NC40YzE0LDgsMjkuOSwxMi4yLDQ2LDEyLjJoMi4xCgkJYzE0LjItMC4yLDI1LjctNC4zLDM0LjktMTEuN2MwLjUtMC40LDEtMC44LDEuNS0xLjNsLTQuMSwxMC45SDEyM2w2LjItMTguOGM3LDIuMywxNC4zLDMuNSwyMS43LDMuNGM3LjIsMCwxNC4zLTEuMSwyMS4yLTMuMgoJCWw2LDE4LjZoNjAuMXYtMzloMTMuMWMzMS43LDAsNTAuNS0xNi4yLDUwLjUtNDMuMkMzMDEuNyw1Mi4yLDI4My41LDM4LjQsMjQ0LjcsMzguNHogTTE1MC45LDEyMWMtNC40LDAtOC44LTAuNy0xMy0yLjNsMTIuOS00MC42CgkJaDAuMmwxMi42LDQwLjdDMTU5LjYsMTIwLjMsMTU1LjIsMTIxLDE1MC45LDEyMXogTTI0Ny4xLDk3LjdoLTguOVY2NC45aDguOWMxMS45LDAsMjEuNCw0LDIxLjQsMTYuMQoJCUMyNjguNSw5My43LDI1OSw5Ny42LDI0Ny4xLDk3LjciLz4KPC9nPgo8L3N2Zz4K" alt="SAP" />
+        <p>The SAP PartnerEdge Incubation Program is part of the Global Partner Recruitment and Incubation Center of Excellence.</p>
+      </div>
+      <div class="ft-col">
+        <h5>Program</h5>
+        <a href="#overview">Overview</a>
+        <a href="#journey">The Journey</a>
+      </div>
+      <div class="ft-col">
+        <h5>Resources</h5>
+        <a href="https://www.sap.com/partners/partner-with-sap.html" target="_blank">Become an SAP Partner</a>
+        <a href="https://www.sap.com/partners.html" target="_blank">SAP PartnerEdge</a>
+        <a href="https://help.sap.com/docs/" target="_blank">SAP Help Portal</a>
+        <a href="https://learning.sap.com/" target="_blank">SAP Learning</a>
+      </div>
+      <div class="ft-col">
+        <h5>Contact</h5>
+        <a href="https://www.sap.com/about/contact.html" target="_blank">Contact SAP</a>
+        <a href="https://www.sap.com/partners/partner-with-sap.html" target="_blank">Partner Recruitment</a>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span class="ft-copy">&copy; 2026 SAP SE or an SAP affiliate company. All rights reserved.</span>
+      <span class="ft-badge">INTERNAL – SAP Partners and Prospective Partners Only</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  // Active nav link
+  const sections = ['overview','journey','faq','cta'];
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const link = document.querySelector(`.nav-links a[data-section="${e.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(id => { const el = document.getElementById(id); if(el) observer.observe(el); });
+
+  // Fade-up on scroll
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(el => fadeObs.observe(el));
+
+  // Animated counters
+  const PROGRESS = [17, 33, 50, 67, 83, 100];
+  const PROG_LABELS = ['Phase 1 of 6 &mdash; Month 1', 'Phase 2 of 6 &mdash; Month 2', 'Phase 3 of 6 &mdash; Month 3–6', 'Phase 4 of 6 &mdash; Month 7', 'Phase 5 of 6 &mdash; Month 7–10', 'Phase 6 of 6 &mdash; Month 10–12'];
+
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    let start = 0;
+    const duration = 1200;
+    const step = target / (duration / 16);
+    const interval = setInterval(() => {
+      start = Math.min(start + step, target);
+      el.textContent = Math.round(start) + suffix;
+      if (start >= target) clearInterval(interval);
+    }, 16);
+  }
+  const statEls = document.querySelectorAll('.stat-val');
+  const statsObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      statEls.forEach(animateCounter);
+      statsObs.disconnect();
+    }
+  }, { threshold: 0.5 });
+  if (statEls.length) statsObs.observe(statEls[0].closest('.hero-stats'));
+
+  // Phase tabs
+  const tabs = document.querySelectorAll('.phase-tab');
+  const panels = document.querySelectorAll('.phase-panel');
+  const ppFill = document.getElementById('pp-fill');
+  const ppText = document.getElementById('pp-text');
+  const ppPct  = document.getElementById('pp-pct');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const idx = parseInt(tab.dataset.phase);
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelector(`.phase-panel[data-panel="${idx}"]`).classList.add('active');
+      ppFill.style.width = PROGRESS[idx] + '%';
+      ppText.innerHTML = PROG_LABELS[idx];
+      ppPct.textContent = PROGRESS[idx] + '%';
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const answer = item.querySelector('.faq-a');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-a').classList.remove('open');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.classList.add('open');
+      }
+    });
+  });
+</script>
+</body>
+</html>
