@@ -523,6 +523,67 @@
     /* INLINE BUTTONS INSIDE DETAIL ITEMS */
     .di-btn { display: inline-flex; margin-top: 10px; }
 
+
+    /* PARTNER DEMAND CENTER BOX */
+    .pdc-box {
+      margin-top: 16px; padding: 22px 24px;
+      background: linear-gradient(135deg, #004E64 0%, #007EA4 55%, #00A4C8 100%);
+      border-radius: 10px; position: relative; overflow: hidden;
+    }
+    .pdc-box::before {
+      content: ''; position: absolute;
+      top: -40px; right: -40px; width: 150px; height: 150px;
+      background: rgba(255,255,255,.06); border-radius: 50%; pointer-events: none;
+    }
+    .pdc-box::after {
+      content: ''; position: absolute;
+      bottom: -20px; left: 40%; width: 90px; height: 90px;
+      background: rgba(255,255,255,.04); border-radius: 50%; pointer-events: none;
+    }
+    .pdc-head {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+      position: relative; z-index: 1;
+    }
+    .pdc-ico {
+      flex-shrink: 0; width: 38px; height: 38px;
+      background: rgba(255,255,255,.18); border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pdc-ico svg { width: 20px; height: 20px; color: #fff; }
+    .pdc-head h5 {
+      font-size: 14px; font-weight: 700; color: #fff;
+      margin: 0; line-height: 1.3;
+    }
+    .pdc-head h5 span {
+      display: block; font-size: 10px; font-weight: 500;
+      color: rgba(255,255,255,.6); letter-spacing: .08em;
+      text-transform: uppercase; margin-bottom: 2px;
+    }
+    .pdc-box > p {
+      font-size: 12.5px; color: rgba(255,255,255,.76);
+      line-height: 1.68; margin-bottom: 16px;
+      position: relative; z-index: 1;
+    }
+    .pdc-btns {
+      display: flex; flex-wrap: wrap; gap: 9px;
+      position: relative; z-index: 1;
+    }
+    .pdc-btn-info {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.35);
+      color: #fff; padding: 9px 16px; border-radius: 6px;
+      font-size: 12px; font-weight: 600; transition: all .2s;
+    }
+    .pdc-btn-info:hover { background: rgba(255,255,255,.26); border-color: rgba(255,255,255,.6); }
+    .pdc-btn-access {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: #fff; color: #005070;
+      padding: 9px 18px; border-radius: 6px;
+      font-size: 12px; font-weight: 700; transition: all .2s;
+    }
+    .pdc-btn-access:hover { background: #E1F9FF; transform: translateY(-1px); box-shadow: 0 3px 12px rgba(0,0,0,.18); }
+    .pdc-btn-info svg, .pdc-btn-access svg { width: 13px; height: 13px; flex-shrink: 0; }
+
     /* BUTTONS INSIDE PH-NOTE */
     .note-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 
@@ -931,6 +992,17 @@
             <p>Move beyond onboarding and develop the capabilities required to successfully position, sell, and deliver SAP solutions. Together with your Incubation Manager, define a tailored enablement journey based on your business model and growth ambitions.</p>
             <p>Access digital self-paced learning, live virtual workshops, personalized coaching sessions, and in-person enablement experiences — all designed for your specific roles.</p>
             <div class="ph-note"><strong>Development Funds</strong>Eligible partners can request SAP-funded enablement through the Development Funds program. Review the criteria and request process with your Incubation Manager.<div class="note-btns"><a href="https://d.dam.sap.com/a/urkoeha/NPP-_DF_-_May_2026-_For_Partners.pdf?rc=10&inline=true&doi=SAP1317892" target="_blank" class="pr-link pr-link--pdf di-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Criteria &amp; Request</a> <a href="https://d.dam.sap.com/s/p/x/hjMmHGo/Development_Funds_-_Entry_and_Eligibility_Criteria_May_2026.pdf?rc=16&inline=true" target="_blank" class="pr-link pr-link--pdf di-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Eligibility Criteria</a></div></div>
+          <div class="pdc-box">
+            <div class="pdc-head">
+              <div class="pdc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m3.29 15 1.41-1.41A4.54 4.54 0 0 0 6 11.5V8s.96-.17 2-.5c4-1.26 5.5-5 5.5-5s3.24.16 4 2.5c.76 2.34-1 5-1 5l-4.5 4.5c0 1.12-.38 2.22-1.09 3.09L9.5 20.71"/><path d="M7 12 3 8l4.5-4.5L11 7"/><path d="m12 7 4.5 4.5-4.5 4.5"/><circle cx="16" cy="8" r="1"/></svg></div>
+              <h5><span>Marketing Enablement</span>SAP Partner Demand Center</h5>
+            </div>
+            <p>Discover the SAP Partner Demand Center: This modern and intuitive marketing enablement platform supports SAP partners at all maturities across all lines of business with campaigns, content, learning curriculum, and demand generation service offers.</p>
+            <div class="pdc-btns">
+              <a href="https://partneredge.sap.com/en/partnership/marketing/center.html" target="_blank" class="pdc-btn-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> More Information</a>
+              <a href="https://partnerdemandcenter.services.sap/" target="_blank" class="pdc-btn-access"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Access the Partner Demand Center</a>
+            </div>
+          </div>
           </div>
           <div class="panel-right">
             <h4>Enablement by Role</h4>
@@ -997,7 +1069,7 @@
         <div class="phase-resources">
           <div class="pr-head">Resources &amp; Links</div>
           <div class="pr-links">
-            <a href="https://d.dam.sap.com/a/urkoeha/NPP-_DF_-_May_2026-_For_Partners.pdf?rc=10&inline=true&doi=SAP1317892" target="_blank" class="pr-link pr-link--pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Development Funds – Criteria &amp; Request</a> <a href="https://d.dam.sap.com/s/p/x/hjMmHGo/Development_Funds_-_Entry_and_Eligibility_Criteria_May_2026.pdf?rc=16&inline=true" target="_blank" class="pr-link pr-link--pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Development Funds – Eligibility Criteria</a> <a href="https://partnerbenefitscatalog.sap.com/Partner-Benefits-Catalog/Demand-Generation/Content-Creation/Value-Proposition%2C-Messaging/LiftOff90-Program---Sprint/p/1002533" target="_blank" class="pr-link pr-link--web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> LiftOff90 Program</a>
+            <a href="https://d.dam.sap.com/a/urkoeha/NPP-_DF_-_May_2026-_For_Partners.pdf?rc=10&inline=true&doi=SAP1317892" target="_blank" class="pr-link pr-link--pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Development Funds – Criteria &amp; Request</a> <a href="https://d.dam.sap.com/s/p/x/hjMmHGo/Development_Funds_-_Entry_and_Eligibility_Criteria_May_2026.pdf?rc=16&inline=true" target="_blank" class="pr-link pr-link--pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Development Funds – Eligibility Criteria</a> <a href="https://partnerbenefitscatalog.sap.com/Partner-Benefits-Catalog/Demand-Generation/Content-Creation/Value-Proposition%2C-Messaging/LiftOff90-Program---Sprint/p/1002533" target="_blank" class="pr-link pr-link--web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> LiftOff90 Program</a> <a href="https://partneredge.sap.com/en/partnership/marketing/center.html" target="_blank" class="pr-link pr-link--web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Partner Demand Center – Info</a> <a href="https://partnerdemandcenter.services.sap/" target="_blank" class="pr-link pr-link--web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Access Partner Demand Center</a>
           </div>
         </div>
       </div>
